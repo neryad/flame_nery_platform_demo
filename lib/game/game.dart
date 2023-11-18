@@ -5,7 +5,7 @@ import 'package:flame/input.dart';
 import 'package:flame_nery_platform_demo/game/level/level.dart';
 
 class SimplePlatformer extends FlameGame
-    with HasCollidables, HasKeyboardHandlerComponents {
+    with HasCollisionDetection, HasKeyboardHandlerComponents {
   Level? _currentLevel;
   late Image spriteSheet;
   @override

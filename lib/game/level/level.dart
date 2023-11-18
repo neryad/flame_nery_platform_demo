@@ -8,6 +8,7 @@ import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
 import 'package:flame_nery_platform_demo/game/actors/platform.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:tiled/tiled.dart';
 
 class Level extends Component with HasGameRef<SimplePlatformer> {
   final String levelName;
@@ -30,16 +31,16 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
   }
 
   void _spwanActors(RenderableTiledMap level) {
-    final platafomrsLayer = level.getObjectGroupFromLayer('Platforms');
-    for (final platformObject in platafomrsLayer.objects) {
+    final platafomrsLayer = level.getLayer<ObjectGroup>('Platforms');
+    for (final platformObject in platafomrsLayer!.objects) {
       final platform = Platform(
           position: Vector2(platformObject.x, platformObject.y),
           size: Vector2(platformObject.width, platformObject.height));
       add(platform);
     }
-    final spawPointsLayer = level.getObjectGroupFromLayer('SpawnPoints');
+    final spawPointsLayer = level.getLayer<ObjectGroup>('SpawnPoints');
 
-    for (final spwanPoint in spawPointsLayer.objects) {
+    for (final spwanPoint in spawPointsLayer!.objects) {
       switch (spwanPoint.name) {
         case 'Player':
           _player = Player(gameRef.spriteSheet,

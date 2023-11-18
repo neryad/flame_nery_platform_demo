@@ -1,13 +1,13 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
+
 import 'package:flame/image_composition.dart';
 import 'package:flame/input.dart';
 import 'package:flame_nery_platform_demo/game/actors/platform.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/services/raw_keyboard.dart';
 
-class Player extends SpriteComponent
-    with HasHitboxes, Collidable, KeyboardHandler {
+class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
   int _hAxisInput = 0;
   bool _jumpInput = false;
   bool _isOnGroud = false;
@@ -44,7 +44,7 @@ class Player extends SpriteComponent
   @override
   Future<void>? onLoad() {
     //debugMode = true;
-    addHitbox(HitboxCircle());
+    add(CircleHitbox());
     return super.onLoad();
   }
 
@@ -82,7 +82,7 @@ class Player extends SpriteComponent
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Platform) {
       if (intersectionPoints.length == 2) {
         // Calculate the collision normal and separation distance.
