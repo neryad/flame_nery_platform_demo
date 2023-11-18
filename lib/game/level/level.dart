@@ -60,13 +60,17 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
           break;
 
         case 'Enemy':
-          final enemy =
-              Enemy(gameRef.spriteSheet, position: position, size: size);
+          final targetObj = int.parse(spwanPoint.properties.first.value);
+          final target = spawPointsLayer.objects
+              .firstWhere((object) => object.id == targetObj);
+          final enemy = Enemy(gameRef.spriteSheet,
+              position: position,
+              size: size,
+              targetPosition: Vector2(target.x, target.y));
           add(enemy);
           break;
 
         case 'Door':
-          print(spwanPoint.properties);
           spwanPoint.properties.first.value;
           final door = Door(gameRef.spriteSheet,
               position: Vector2(spwanPoint.x, spwanPoint.y),

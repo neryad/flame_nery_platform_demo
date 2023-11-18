@@ -1,10 +1,12 @@
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 
 class Enemy extends SpriteComponent {
   Enemy(
     Image image, {
     Vector2? position,
+    Vector2? targetPosition,
     Vector2? size,
     Vector2? scale,
     double? angle,
@@ -18,5 +20,20 @@ class Enemy extends SpriteComponent {
             scale: scale,
             angle: angle,
             anchor: anchor,
-            priority: priority);
+            priority: priority) {
+    if (targetPosition != null && position != null) {
+      final effect = SequenceEffect([
+        MoveToEffect(
+          targetPosition,
+          EffectController(speed: 100),
+        )..onFinishCallback = () => flipHorizontallyAroundCenter(),
+        MoveToEffect(
+          position + Vector2(32, 0),
+          EffectController(speed: 100),
+        )..onFinishCallback = () => flipHorizontallyAroundCenter(),
+      ], infinite: true);
+
+      add(effect);
+    }
+  }
 }

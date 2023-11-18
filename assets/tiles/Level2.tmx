@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="37">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="39">
  <tileset firstgid="1" source="Spritesheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="12">
   <data encoding="base64">
@@ -32,12 +32,26 @@
   <object id="25" gid="4" x="357.231" y="318.42" width="32" height="32"/>
   <object id="26" gid="4" x="255.441" y="226.957" width="32" height="32"/>
   <object id="27" gid="4" x="255.441" y="159.096" width="32" height="32"/>
-  <object id="28" name="Enemy" gid="2" x="544.584" y="157.621" width="32" height="32"/>
-  <object id="29" name="Enemy" gid="2" x="128.572" y="316.945" width="32" height="32"/>
+  <object id="28" name="Enemy" gid="2" x="544.584" y="157.621" width="32" height="32">
+   <properties>
+    <property name="Target" type="object" value="38"/>
+   </properties>
+  </object>
+  <object id="29" name="Enemy" gid="2" x="98.7209" y="318.438" width="32" height="32">
+   <properties>
+    <property name="Target" type="object" value="37"/>
+   </properties>
+  </object>
   <object id="30" name="Door" gid="3" x="894.211" y="318.42" width="64" height="64">
    <properties>
     <property name="NextLevel" value="Level1.tmx"/>
    </properties>
+  </object>
+  <object id="37" x="534.328" y="268.657">
+   <point/>
+  </object>
+  <object id="38" x="701.493" y="147.761">
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="3" name="Platforms">
