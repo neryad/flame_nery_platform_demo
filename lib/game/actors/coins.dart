@@ -26,6 +26,13 @@ class Coins extends SpriteComponent with CollisionCallbacks {
   @override
   Future<void>? onLoad() {
     add(CircleHitbox()..collisionType = CollisionType.passive);
+    add(MoveEffect.by(
+        Vector2(0, -4),
+        EffectController(
+          alternate: true,
+          infinite: true,
+          duration: 1,
+        )));
     return super.onLoad();
   }
 
