@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame_nery_platform_demo/game/actors/coins.dart';
 import 'package:flame_nery_platform_demo/game/actors/door.dart';
@@ -9,14 +11,21 @@ import 'package:flame_tiled/flame_tiled.dart';
 
 class Level extends Component with HasGameRef<SimplePlatformer> {
   final String levelName;
-
+  late Player _player;
+  late Rect _levelBounds;
   Level(this.levelName) : super();
 
   @override
   Future<void>? onLoad() async {
     final level = await TiledComponent.load(levelName, Vector2.all(32));
     add(level);
+    _levelBounds = Rect.fromLTWH(
+        0,
+        0,
+        (level.tileMap.map.width * level.tileMap.map.tileWidth).toDouble(),
+        (level.tileMap.map.height * level.tileMap.map.tileHeight).toDouble());
     _spwanActors(level.tileMap);
+    _setupCamera();
     return super.onLoad();
   }
 
@@ -33,10 +42,12 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
     for (final spwanPoint in spawPointsLayer.objects) {
       switch (spwanPoint.name) {
         case 'Player':
-          final player = Player(gameRef.spriteSheet,
+          _player = Player(gameRef.spriteSheet,
+              anchor: Anchor.center,
+              levelBounds: _levelBounds,
               position: Vector2(spwanPoint.x, spwanPoint.y),
               size: Vector2(spwanPoint.width, spwanPoint.height));
-          add(player);
+          add(_player);
           break;
 
         case 'Coin':
@@ -61,5 +72,10 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
           break;
       }
     }
+  }
+
+  void _setupCamera() {
+    gameRef.camera.followComponent(_player);
+    gameRef.camera.worldBounds = _levelBounds;
   }
 }

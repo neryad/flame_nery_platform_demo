@@ -14,7 +14,7 @@ class SimplePlatformer extends FlameGame
     await Flame.device.fullScreen();
     await Flame.device.setLandscape();
     camera.viewport = FixedResolutionViewport(Vector2(640, 330));
-    loadLevel('Level1.tmx');
+    loadLevel('Level2.tmx');
     return super.onLoad();
   }
 
