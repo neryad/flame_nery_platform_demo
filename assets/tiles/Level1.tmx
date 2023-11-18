@@ -8,7 +8,11 @@
  </layer>
  <objectgroup id="2" name="SpawnPoints">
   <object id="3" name="Player" x="33.4383" y="291.11" width="27.5375" height="23.6035"/>
-  <object id="21" name="Door" x="578.287" y="131.786" width="58.0254" height="56.0584"/>
+  <object id="21" name="Door" x="578.287" y="131.786" width="58.0254" height="56.0584">
+   <properties>
+    <property name="NextLevel" value="Level2.tmx"/>
+   </properties>
+  </object>
   <object id="22" x="192.762" y="228.167" width="29.5044" height="25.5705"/>
   <object id="23" name="Coin" x="192.762" y="228.167" width="29.5044" height="25.5705"/>
   <object id="24" name="Coin" x="192.762" y="228.167" width="29.5044" height="25.5705"/>
@@ -26,7 +30,11 @@
  </objectgroup>
  <objectgroup id="4" name="Platforms">
   <object id="42" name="Platforms" x="1" y="323" width="638" height="60"/>
-  <object id="43" name="Platforms" x="192" y="256" width="128" height="64"/>
+  <object id="43" name="Platforms" x="192" y="256" width="128" height="64">
+   <properties>
+    <property name="NextLevel" value="Level2.tmx"/>
+   </properties>
+  </object>
   <object id="44" name="Platforms" x="448" y="192" width="192" height="128"/>
  </objectgroup>
 </map>

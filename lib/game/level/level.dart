@@ -41,34 +41,38 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
     final spawPointsLayer = level.getLayer<ObjectGroup>('SpawnPoints');
 
     for (final spwanPoint in spawPointsLayer!.objects) {
+      final position = Vector2(spwanPoint.x, spwanPoint.y - spwanPoint.height);
+      final size = Vector2(spwanPoint.width, spwanPoint.height);
       switch (spwanPoint.name) {
         case 'Player':
           _player = Player(gameRef.spriteSheet,
               anchor: Anchor.center,
               levelBounds: _levelBounds,
-              position: Vector2(spwanPoint.x, spwanPoint.y),
-              size: Vector2(spwanPoint.width, spwanPoint.height));
+              position: position,
+              size: size);
           add(_player);
           break;
 
         case 'Coin':
-          final coin = Coins(gameRef.spriteSheet,
-              position: Vector2(spwanPoint.x, spwanPoint.y),
-              size: Vector2(spwanPoint.width, spwanPoint.height));
+          final coin =
+              Coins(gameRef.spriteSheet, position: position, size: size);
           add(coin);
           break;
 
         case 'Enemy':
-          final enemy = Enemy(gameRef.spriteSheet,
-              position: Vector2(spwanPoint.x, spwanPoint.y),
-              size: Vector2(spwanPoint.width, spwanPoint.height));
+          final enemy =
+              Enemy(gameRef.spriteSheet, position: position, size: size);
           add(enemy);
           break;
 
         case 'Door':
+          print(spwanPoint.properties);
+          spwanPoint.properties.first.value;
           final door = Door(gameRef.spriteSheet,
               position: Vector2(spwanPoint.x, spwanPoint.y),
-              size: Vector2(spwanPoint.width, spwanPoint.height));
+              size: size, onPlayerEnter: () {
+            gameRef.loadLevel(spwanPoint.properties.first.value);
+          });
           add(door);
           break;
       }
