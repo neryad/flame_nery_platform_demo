@@ -2,6 +2,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame/input.dart';
+import 'package:flame_nery_platform_demo/game/hub/hub.dart';
 import 'package:flame_nery_platform_demo/game/level/level.dart';
 
 class SimplePlatformer extends FlameGame
@@ -15,6 +16,7 @@ class SimplePlatformer extends FlameGame
     await Flame.device.setLandscape();
     camera.viewport = FixedResolutionViewport(Vector2(640, 330));
     loadLevel('Level2.tmx');
+    add(Hub());
     return super.onLoad();
   }
 
