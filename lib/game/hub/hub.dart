@@ -25,6 +25,13 @@ class Hub extends Component with HasGameRef<SimplePlatformer> {
         position: Vector2(healthTextComponent.position.x - 5, 5));
 
     add(playerSprite);
+    gameRef.playerData.score.addListener(() {
+      scoreTextComponent.text = 'Score: ${gameRef.playerData.score.value}';
+    });
+
+    gameRef.playerData.health.addListener(() {
+      healthTextComponent.text = 'x${gameRef.playerData.health.value}';
+    });
 
     return super.onLoad();
   }

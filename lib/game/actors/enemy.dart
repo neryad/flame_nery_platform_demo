@@ -3,8 +3,10 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
+import 'package:flame_nery_platform_demo/game/game.dart';
 
-class Enemy extends SpriteComponent with CollisionCallbacks {
+class Enemy extends SpriteComponent
+    with CollisionCallbacks, HasGameRef<SimplePlatformer> {
   Enemy(
     Image image, {
     Vector2? position,
@@ -49,7 +51,13 @@ class Enemy extends SpriteComponent with CollisionCallbacks {
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Player) {
       other.hit();
+      if (gameRef.playerData.health.value > 0) {
+        print(gameRef.playerData.health.value);
+        gameRef.playerData.health.value -= 1;
+        print(gameRef.playerData.health.value);
+      }
     }
+
     super.onCollisionStart(intersectionPoints, other);
   }
 }

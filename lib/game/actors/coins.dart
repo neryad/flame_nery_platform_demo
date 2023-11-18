@@ -3,8 +3,10 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
+import 'package:flame_nery_platform_demo/game/game.dart';
 
-class Coins extends SpriteComponent with CollisionCallbacks {
+class Coins extends SpriteComponent
+    with CollisionCallbacks, HasGameRef<SimplePlatformer> {
   Coins(
     Image image, {
     Vector2? position,
@@ -44,6 +46,7 @@ class Coins extends SpriteComponent with CollisionCallbacks {
         LinearEffectController(0.3),
       )..onFinishCallback = () => add(RemoveEffect()));
     }
+    gameRef.playerData.score.value += 1;
     super.onCollisionStart(intersectionPoints, other);
   }
 }
