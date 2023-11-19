@@ -4,6 +4,7 @@ import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
+import 'package:flame_nery_platform_demo/utils/audio_manager.dart';
 
 class Coins extends SpriteComponent
     with CollisionCallbacks, HasGameRef<SimplePlatformer> {
@@ -42,6 +43,7 @@ class Coins extends SpriteComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Player) {
+      AudioManager.playSfx('Collectibles_6.wav');
       add(OpacityEffect.fadeOut(LinearEffectController(0.3),
           onComplete: () => add(
                 RemoveEffect(),

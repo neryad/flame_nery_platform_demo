@@ -3,6 +3,7 @@ import 'package:flame/input.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
 import 'package:flame_nery_platform_demo/overalys/game_over.dart';
 import 'package:flame_nery_platform_demo/overalys/pause_menu.dart';
+import 'package:flame_nery_platform_demo/utils/audio_manager.dart';
 
 class Hub extends Component with HasGameRef<SimplePlatformer> {
   late final TextComponent scoreTextComponent;
@@ -40,6 +41,7 @@ class Hub extends Component with HasGameRef<SimplePlatformer> {
 
     final puaseButton = SpriteButtonComponent(
         onPressed: () {
+          AudioManager.pauseBgm();
           gameRef.pauseEngine();
           gameRef.overlays.add(PauseMenu.id);
         },
@@ -49,7 +51,7 @@ class Hub extends Component with HasGameRef<SimplePlatformer> {
         position: Vector2(gameRef.size.x / 2, 5),
         anchor: Anchor.topCenter)
       ..positionType = PositionType.viewport;
-    ;
+
     add(puaseButton);
     return super.onLoad();
   }
@@ -61,6 +63,7 @@ class Hub extends Component with HasGameRef<SimplePlatformer> {
   void onHealthChange() {
     healthTextComponent.text = 'x${gameRef.playerData.health.value}';
     if (gameRef.playerData.health.value == 0) {
+      AudioManager.stopBgm();
       gameRef.pauseEngine();
       gameRef.overlays.add(GameOVer.id);
     }

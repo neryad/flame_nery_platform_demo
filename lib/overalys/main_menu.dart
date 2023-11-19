@@ -1,7 +1,7 @@
 import 'package:flame_nery_platform_demo/game/game.dart';
 import 'package:flame_nery_platform_demo/game/game_play.dart';
+import 'package:flame_nery_platform_demo/overalys/setting_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MainMenu extends StatelessWidget {
   static const id = "MainMenu";
@@ -27,7 +27,11 @@ class MainMenu extends StatelessWidget {
             SizedBox(
                 height: 100,
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Settings'))),
+                    onPressed: () {
+                      gameRef.overlays.remove(id);
+                      gameRef.overlays.add(SettingMenu.id);
+                    },
+                    child: const Text('Settings'))),
           ],
         ),
       ),

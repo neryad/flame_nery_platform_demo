@@ -3,8 +3,9 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 
 import 'package:flame/image_composition.dart';
-import 'package:flame/input.dart';
+// import 'package:flame/input.dart';
 import 'package:flame_nery_platform_demo/game/actors/platform.dart';
+import 'package:flame_nery_platform_demo/utils/audio_manager.dart';
 import 'package:flutter/src/services/raw_keyboard.dart';
 
 class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
@@ -54,6 +55,7 @@ class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
     _velocity.y += _gravity;
     if (_jumpInput) {
       if (_isOnGroud) {
+        AudioManager.playSfx('Jump_15.wav');
         _velocity.y = -_jumpSpeed;
         _isOnGroud = false;
       }

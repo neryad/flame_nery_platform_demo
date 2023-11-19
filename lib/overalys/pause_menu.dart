@@ -1,5 +1,6 @@
 import 'package:flame_nery_platform_demo/game/game.dart';
 import 'package:flame_nery_platform_demo/overalys/main_menu.dart';
+import 'package:flame_nery_platform_demo/utils/audio_manager.dart';
 import 'package:flutter/material.dart';
 
 class PauseMenu extends StatelessWidget {
@@ -19,6 +20,7 @@ class PauseMenu extends StatelessWidget {
                 height: 100,
                 child: ElevatedButton(
                     onPressed: () {
+                      AudioManager.resumeBgm();
                       gameRef.overlays.remove(id);
                       gameRef.resumeEngine();
                     },

@@ -4,6 +4,7 @@ import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
+import 'package:flame_nery_platform_demo/utils/audio_manager.dart';
 
 class Enemy extends SpriteComponent
     with CollisionCallbacks, HasGameRef<SimplePlatformer> {
@@ -61,6 +62,7 @@ class Enemy extends SpriteComponent
         ));
         other.jump();
       } else {
+        AudioManager.playSfx('Hit_2.wav');
         other.hit();
         if (gameRef.playerData.health.value > 0) {
           gameRef.playerData.health.value -= 1;
