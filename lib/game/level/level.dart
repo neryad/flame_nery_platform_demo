@@ -7,10 +7,12 @@ import 'package:flame_nery_platform_demo/game/actors/enemy.dart';
 import 'package:flame_nery_platform_demo/game/actors/palyer.dart';
 import 'package:flame_nery_platform_demo/game/actors/platform.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
+import 'package:flame_nery_platform_demo/game/game_play.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:tiled/tiled.dart';
 
-class Level extends Component with HasGameRef<SimplePlatformer> {
+class Level extends Component
+    with HasGameRef<SimplePlatformer>, ParentIsA<GamePlay> {
   final String levelName;
   late Player _player;
   late Rect _levelBounds;
@@ -75,7 +77,7 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
           final door = Door(gameRef.spriteSheet,
               position: Vector2(spwanPoint.x, spwanPoint.y),
               size: size, onPlayerEnter: () {
-            gameRef.loadLevel(spwanPoint.properties.first.value);
+            parent.loadLevel(spwanPoint.properties.first.value);
           });
           add(door);
           break;

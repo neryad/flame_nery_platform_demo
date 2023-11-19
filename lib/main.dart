@@ -1,5 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flame_nery_platform_demo/game/game.dart';
+import 'package:flame_nery_platform_demo/overalys/game_over.dart';
+import 'package:flame_nery_platform_demo/overalys/main_menu.dart';
+import 'package:flame_nery_platform_demo/overalys/pause_menu.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +41,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: GameWidget(game: kDebugMode ? SimplePlatformer() : _game),
+        body: GameWidget<SimplePlatformer>(
+          game: kDebugMode ? SimplePlatformer() : _game,
+          overlayBuilderMap: {
+            MainMenu.id: (context, game) => MainMenu(gameRef: game),
+            PauseMenu.id: (context, game) => PauseMenu(gameRef: game),
+            GameOVer.id: (context, game) => GameOVer(gameRef: game)
+          },
+          initialActiveOverlays: const [MainMenu.id],
+        ),
       ),
     );
   }
