@@ -42,9 +42,10 @@ class Coins extends SpriteComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Player) {
-      add(OpacityEffect.fadeOut(
-        LinearEffectController(0.3),
-      )..onFinishCallback = () => add(RemoveEffect()));
+      add(OpacityEffect.fadeOut(LinearEffectController(0.3),
+          onComplete: () => add(
+                RemoveEffect(),
+              )));
     }
     gameRef.playerData.score.value += 1;
     super.onCollisionStart(intersectionPoints, other);

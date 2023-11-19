@@ -5,7 +5,6 @@ import 'package:flame/effects.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame/input.dart';
 import 'package:flame_nery_platform_demo/game/actors/platform.dart';
-import 'package:flutter/src/services/keyboard_key.g.dart';
 import 'package:flutter/src/services/raw_keyboard.dart';
 
 class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
@@ -112,5 +111,10 @@ class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
   void hit() {
     add(OpacityEffect.fadeOut(
         EffectController(alternate: true, duration: 0.1, repeatCount: 3)));
+  }
+
+  void jump() {
+    _jumpInput = true;
+    _isOnGroud = true;
   }
 }
