@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -20,30 +22,23 @@ class Player extends SpriteComponent with CollisionCallbacks, KeyboardHandler {
   late Vector2 _minClamp;
   late Vector2 _maxClamp;
   Player(
-    Image image, {
+    super.image, {
     required Rect levelBounds,
-    Vector2? position,
+    super.position,
     Vector2? size,
-    Vector2? scale,
-    double? angle,
-    Anchor? anchor,
-    int? priority,
-  }) : super.fromImage(image,
-            srcPosition: Vector2.zero(),
-            srcSize: Vector2.all(32),
-            position: position,
-            size: size,
-            scale: scale,
-            angle: angle,
-            anchor: anchor,
-            priority: priority) {
+    super.scale,
+    super.angle,
+    super.anchor,
+    super.priority,
+  }) : super.fromImage(
+            srcPosition: Vector2.zero(), srcSize: Vector2.all(32), size: size) {
     final halfSize = size! / 2;
     _minClamp = levelBounds.topLeft.toVector2() + halfSize;
     _maxClamp = levelBounds.bottomRight.toVector2() - halfSize;
   }
 
   @override
-  Future<void>? onLoad() {
+  FutureOr<void> onLoad() {
     //debugMode = true;
     add(CircleHitbox());
     return super.onLoad();

@@ -1,18 +1,20 @@
+import 'dart:async';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class Platform extends PositionComponent with CollisionCallbacks {
   Platform({
-    required Vector2 position,
-    required Vector2 size,
-    Vector2? scale,
+    required Vector2 super.position,
+    required Vector2 super.size,
+    super.scale,
     double? angle,
-    Anchor? anchor,
+    super.anchor,
     int? priority,
-  }) : super(position: position, size: size, scale: scale, anchor: anchor);
+  });
 
   @override
-  Future<void>? onLoad() {
+  FutureOr<void> onLoad() {
     // debugMode = true;
 
     add(RectangleHitbox()..collisionType = CollisionType.passive);
