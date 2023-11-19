@@ -1,5 +1,5 @@
 import 'package:flame_audio/flame_audio.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class AudioManager {
   static final sfx = ValueNotifier(true);
